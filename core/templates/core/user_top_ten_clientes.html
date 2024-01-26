@@ -1,0 +1,20 @@
+{% extends "tienda/base.html" %}{%block title%}Top ten clientes{%endblock %}
+{%block other_content %}Ranking 10 mejores clientes{% endblock %} {%block content %} 
+<div class="row shadow-lg px-5 py-5 my-5">
+  <table>
+    <th>Nombre</th>
+    <th>Nºde Compras</th>
+    <th>Importe total compras</th>
+    <th>Unidades Compradas</th>
+    {%for cliente in clientes %}
+    <tr>
+      <td>{{cliente.username}}</td>
+      <td>{{cliente.count_compras}}</td>
+      <td>{{cliente.compras}}</td>
+      <td>{{cliente.unidades_compra}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+ {% endblock %}

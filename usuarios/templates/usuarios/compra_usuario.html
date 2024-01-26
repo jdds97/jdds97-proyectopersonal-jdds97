@@ -1,0 +1,46 @@
+{% extends 'tienda/base.html'%}
+{% load tags %}
+{%block title%}Productos por usuario{%endblock %}
+{%block other_content %}Productos de  {{request.user.username}}{% endblock %} 
+{%block content%}
+<form
+action="{% url 'compras_usuario'%}"
+method="GET"
+enctype="multipart/form-data"
+>
+<div class="form-group">
+  <label for="usuario">Usuario</label>
+  
+  <select class="form-select" id="cliente" name="cliente">
+    {% get_clientes as clientes %}
+    {% for cliente in clientes %}
+    <option value="{{cliente.id}}">{{cliente}}</option>
+    {% endfor %}
+  </select>
+<button class="mt-3 btn btn-primary" type="submit">Buscar</button>
+</form>
+<table class="table my-3 table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Producto</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Total</th>
+      <th scope="col">Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for compra in compra_list %}
+    <tr>
+      <td>{{compra.id}}</td>
+      <td>{{compra.producto.nombre}}</td>
+      <td>{{compra.producto.precio}}</td>
+      <td>{{compra.unidades}}</td>
+      <td>{{compra.importe}}</td>
+      <td>{{compra.fecha}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+{%endblock %}

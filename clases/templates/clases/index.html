@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %} {% load static %} {% block title%}Inicio{%endblock%}
+<h1>Bienvenido a Sthenos Fit</h1>
+{% block navbar %}
+<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="{%url 'clases_welcome'%}"
+    >Clases</a
+  >
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{%url 'fitness_welcome'%}">Fitness</a>
+</li>
+{% if request.user.is_staff or request.is_superuser%}
+<li class="nav-item">
+  <a class="nav-link" href="{%url 'usuarios_welcome'%}">Usuarios</a>
+</li>
+{%else%}
+<li class="nav-item">
+  <a class="nav-link">Contacto</a>
+</li>
+{% endif %} {% endblock %} {% block body %}
+<div class="container">
+  <div class="row">
+    <h1 class="display-2"></h1>
+    <div class="col-12">
+      {%if request.user.is_authenticated %}
+      <h2 class="display-5">
+        Bienvenido {{request.user.first_name|default:request.user.username}}
+      </h2>
+      <a class="btn btn-danger">Cerrar sesión</a>
+
+      {%endif%} {%if request.user.is_anonymous%}
+      <a class="btn btn-warning">Apúntate</a>
+      {%endif%}
+    </div>
+  </div>
+  <div class="container">{%block content %}{%endblock%}</div>
+</div>
+{% endblock %}

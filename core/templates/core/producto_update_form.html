@@ -1,0 +1,12 @@
+{% extends 'tienda/base.html'%}{%block title%}Editar producto{%endblock %}
+{%block other_content %}Editar producto {{producto.nombre}} {% endblock %}
+{%block content%}
+<form
+  action="{%url 'editar_producto' producto.pk%}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Guardar" class="btn btn-primary" />
+</form>
+{%endblock %}
