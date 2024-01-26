@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-n2r(&78)7$4e_gr+-e(tg9$-n=ajhbc!taci8-*(w52_tj6@&!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["sthenos-fit.up.railway.app"]
 
 
 # Application definition
