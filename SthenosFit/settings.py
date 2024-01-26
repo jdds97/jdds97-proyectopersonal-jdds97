@@ -90,6 +90,8 @@ WSGI_APPLICATION = "SthenosFit.wsgi.application"
     }
 } """
 
+""" 
+BASE DE DATOS PLANET SCALE CON ARCHIVO .ENV
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
@@ -101,6 +103,17 @@ DATABASES = {
         "OPTIONS": {
             "ssl": {"ca": os.environ.get("MYSQL_ATTR_SSL_CA")},
         },
+    }
+}
+ """
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "railway",
+        "HOST": "roundhouse.proxy.rlwy.net",
+        "PORT": "44298",
+        "USER": "root",
+        "PASSWORD": "HAHe2DChhDcHcHfDG61cbdGhg25fhCCC",
     }
 }
 
