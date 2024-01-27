@@ -24,6 +24,7 @@ from SthenosFit import settings
 urlpatterns = [
     path("", include("core.urls")),
     path("admin/", admin.site.urls),
+    
     path("clases/", include("clases.urls")),
     path(
         "clases_welcome/", RedirectView.as_view(url="/clases/"), name="clases_welcome"

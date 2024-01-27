@@ -1,7 +1,4 @@
-{% extends 'core/base.html' %} {% load static %} {% block
-title%}Inicio{%endblock%}
-<h1>Bienvenido a Sthenos Fit</h1>
-{% block navbar %}
+{% extends 'core/base.html' %} {% load static %} {% block title%}Inicio{%endblock%} {% block navbar %}
 <li class="nav-item">
   <a class="nav-link active" aria-current="page" href="{%url 'listar_clases'%}"
     >Lista Clases</a
@@ -18,22 +15,21 @@ title%}Inicio{%endblock%}
 <li class="nav-item">
   <a class="nav-link">Contacto</a>
 </li>
-{% endif %} {% if request.user.is_authenticated and !(request.user.is_staff or
-request.is_superuser) %}
+{% endif %}{% if request.user.is_authenticated and not request.user.is_staff and not request.user.is_superuser %}
 <li class="nav-item">
   <a class="nav-link" href="{% url 'cliente_perfil' request.user %}"
     >Mi perfil</a
   >
 </li>
 <a class="btn btn-danger">Cerrar sesión</a>
-{% else %}
+{% else %} {% comment %}
 <li class="nav-item">
   <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
 </li>
-{% endif %}
+{% endcomment %} {% endif %}
 <form
   class="d-flex"
   role="search"
@@ -55,10 +51,11 @@ request.is_superuser) %}
     <div class="col-12">
       {%if request.user.is_authenticated %}
       <h2 class="display-5">
-        Bienvenido {{request.user.first_name|default:request.user.username}}
+        Bienvenido {{request.user.first_name|default:request.user.username}} a
+        Sthenos Fitness
       </h2>
       {%else%}
-      <h2 class="display-5">Bienvenido</h2>
+      <h2 class="display-5">Bienvenido a Sthenos Fitness</h2>
       {%endif%}
     </div>
   </div>

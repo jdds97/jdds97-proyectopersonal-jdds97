@@ -17,7 +17,8 @@
 <li class="nav-item">
   <a class="nav-link">Contacto</a>
 </li>
-{% endif %}{% if request.user.is_authenticated and not (request.user.is_staff or request.is_superuser) %}
+{% endif %}{% if request.user.is_authenticated and not request.user.is_staff and not request.user.is_superuser %}
+
 <li class="nav-item">
   <a class="nav-link" href="{% url 'cliente_perfil' request.user %}"
     >Mi perfil</a
@@ -25,28 +26,34 @@
 </li>
 <a class="btn btn-danger">Cerrar sesión</a>
 {% else %}
+{%if request.user.is_anonymous%}
+<li class="nav-item">
+  <a class="nav-link btn btn-warning" >Apúntate</a>
+</li>
+{%endif%}
+</div>
+{% comment "" %}
 <li class="nav-item">
   <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
 </li>
-{% endif %} {% endblock %} {% block body %}
+{% endcomment %} {% endif %} {% endblock %} {% block body %}
 <div class="container">
   <div class="row">
     <h1 class="display-2"></h1>
     <div class="col-12">
       {%if request.user.is_authenticated %}
       <h2 class="display-5">
-        Bienvenido {{request.user.first_name|default:request.user.username}}
+        Bienvenido a Sthenos Fitness
+        {{request.user.first_name|default:request.user.username}}
       </h2>
-      <a class="btn btn-danger">Cerrar sesión</a>
-
-      {%endif%} {%if request.user.is_anonymous%}
-      <a class="btn btn-warning">Apúntate</a>
+      {%else%}
+      <h2 class="display-5">Bienvenido a Sthenos Fitness</h2>
       {%endif%}
     </div>
+    <div class="container">{%block content %}{%endblock%}</div>
   </div>
-  <div class="container">{%block content %}{%endblock%}</div>
+  {% endblock %}
 </div>
-{% endblock %}
