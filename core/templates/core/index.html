@@ -17,8 +17,7 @@
 <li class="nav-item">
   <a class="nav-link">Contacto</a>
 </li>
-{% endif %} {% if request.user.is_authenticated and !(request.user.is_staff or
-request.is_superuser) %}
+{% endif %}{% if request.user.is_authenticated and not (request.user.is_staff or request.is_superuser) %}
 <li class="nav-item">
   <a class="nav-link" href="{% url 'cliente_perfil' request.user %}"
     >Mi perfil</a
