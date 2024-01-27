@@ -5,11 +5,10 @@ from .views import (
     CrearClase,
     ListarClases,
     EditarClase,
+    DetalleClase,
     EliminarClase,
-    CrearTipoClase,
-    ListarTipoClases,
-    EditarTipoClase,
-    EliminarTipoClase,
+    ClasesClientes,
+    ClasesPorTipo,
     CrearReserva,
     ListarReservas,
     EditarReserva,
@@ -41,27 +40,11 @@ urlpatterns = [
         staff_member_required(login_required(EliminarClase.as_view())),
         name="eliminar_clase",
     ),
-    # endregion
-    # region CRUD de Tipo de Clases
+    # detalle clase
     path(
-        "tipo_clase/nuevo/",
-        staff_member_required(login_required(CrearTipoClase.as_view())),
-        name="crear_tipo_clase",
-    ),
-    path(
-        "tipo_clase/listado/",
-        staff_member_required(login_required(ListarTipoClases.as_view())),
-        name="listar_tipo_clases",
-    ),
-    path(
-        "tipo_clase/editar/<int:pk>",
-        staff_member_required(login_required(EditarTipoClase.as_view())),
-        name="editar_tipo_clase",
-    ),
-    path(
-        "tipo_clase/eliminar/<int:pk>",
-        staff_member_required(login_required(EliminarTipoClase.as_view())),
-        name="eliminar_tipo_clase",
+        "detalle/<int:pk>",
+        login_required(DetalleClase.as_view()),
+        name="detalle_clase",
     ),
     # endregion
     # region CRUD de Clases
@@ -84,6 +67,19 @@ urlpatterns = [
         "reserva/eliminar/<int:pk>",
         staff_member_required(login_required(EliminarReserva.as_view())),
         name="eliminar_reserva",
+    ),
+    # endregion
+    # region Clases tipo
+    path(
+        "<str:username>/",
+        login_required(ClasesClientes.as_view()),
+        name="clases_cliente",
+    ),
+    # clases por tipo
+    path(
+        "tipo/",
+        login_required(ClasesPorTipo.as_view()),
+        name="clases_por_tipo",
     ),
     # endregion
 ]

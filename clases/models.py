@@ -22,6 +22,7 @@ class Clase(models.Model):
     usuarios = models.ManyToManyField(
         "usuarios.Cliente",
     )
+    #Añadir fecha clase?
 
     def __str__(self):
         return f"Clase - {self.tipo_clase}"

@@ -1,0 +1,11 @@
+{% extends 'clases/index.html'%} {%block content%} {%block title%}{%endblock
+%}{%block other_content %} Crear clase{% endblock %}{%block content%}
+<form
+  action="{% url 'crear_clase'%}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Guardar" />
+</form>
+{%endblock %}

@@ -1,0 +1,18 @@
+{% extends 'clases/index.html'%}{%block title%}Lista Clases Cliente{%endblock %}
+{%block other_content %} Clases de {{request.user}} {% endblock %} {%block
+content%} {%for clase in clases_clientes %}
+<div class="row shadow-lg">
+  <div class="col-12">
+    <p>{{clase.tramo}}</p>
+    <p>{{clase.tipo_clase}}</p>
+    <p>{{clase.instructor}}</p>
+    <p>{{clase.cupos_disponibles}}</p>
+    <a class="btn btn-success" href="{%url 'detalle_reserva' clase.pk %}"
+      >Detalle Reserva
+    </a>
+   
+    {% comment %} cancelar Reserva {% endcomment %}  {% endif %}
+  </div>
+</div>
+
+{% endfor %} {% endblock %}

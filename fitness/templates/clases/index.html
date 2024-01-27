@@ -1,5 +1,4 @@
-{% extends 'core/base.html' %} {% load static %} {% block
-title%}Inicio{%endblock%}
+{% extends 'core/base.html' %} {% load static %} {% block title%}Inicio{%endblock%}
 <h1>Bienvenido a Sthenos Fit</h1>
 {% block navbar %}
 <li class="nav-item">
@@ -10,28 +9,13 @@ title%}Inicio{%endblock%}
 <li class="nav-item">
   <a class="nav-link" href="{%url 'fitness_welcome'%}">Fitness</a>
 </li>
-{% if request.user.is_staff or request.is_superuser %}
+{% if request.user.is_staff or request.is_superuser%}
 <li class="nav-item">
-  <a class="nav-link" href="{% url 'usuarios_welcome' %}">Usuarios</a>
+  <a class="nav-link" href="{%url 'usuarios_welcome'%}">Usuarios</a>
 </li>
-{% else %}
+{%else%}
 <li class="nav-item">
   <a class="nav-link">Contacto</a>
-</li>
-{% endif %} {% if request.user.is_authenticated and !(request.user.is_staff or
-request.is_superuser) %}
-<li class="nav-item">
-  <a class="nav-link" href="{% url 'cliente_perfil' request.user %}"
-    >Mi perfil</a
-  >
-</li>
-<a class="btn btn-danger">Cerrar sesión</a>
-{% else %}
-<li class="nav-item">
-  <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
 </li>
 {% endif %} {% endblock %} {% block body %}
 <div class="container">

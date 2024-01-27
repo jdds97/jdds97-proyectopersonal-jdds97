@@ -8,9 +8,10 @@ from django.views.generic import (
     DetailView,
 )
 from django.urls import reverse_lazy
-from .models import Clase, TipoClase, Reserva
+from .models import Clase, Reserva
 
 
+# pylint: disable=no-member
 # region welcome
 def welcome(request):
     """
@@ -47,6 +48,7 @@ class EditarClase(UpdateView):
     """
 
     model = Clase
+    template_name_suffix = "_update_form"
     fields = "__all__"
     success_url = reverse_lazy("listar_clases")
 
@@ -70,47 +72,8 @@ class DetalleClase(DetailView):
 
 
 # endregion
-# region CRUD de Tipo de Clases
 
 
-class CrearTipoClase(CreateView):
-    """
-    Vista para crear un tipo de clase.
-    """
-
-    model = TipoClase
-    fields = "__all__"
-    success_url = reverse_lazy("listar_tipo_clases")
-
-
-class ListarTipoClases(ListView):
-    """
-    Vista para listar los tipos de clases.
-    """
-
-    model = TipoClase
-
-
-class EditarTipoClase(UpdateView):
-    """
-    Vista para editar un tipo de clase.
-    """
-
-    model = TipoClase
-    fields = "__all__"
-    success_url = reverse_lazy("listar_tipo_clases")
-
-
-class EliminarTipoClase(DeleteView):
-    """
-    Vista para eliminar un tipo de clase.
-    """
-
-    model = TipoClase
-    success_url = reverse_lazy("listar_tipo_clases")
-
-
-# endregion
 # region CRUD de Reservas
 class CrearReserva(CreateView):
     """
@@ -120,6 +83,7 @@ class CrearReserva(CreateView):
     model = Reserva
     fields = "__all__"
     success_url = reverse_lazy("listar_reservas")
+    
 
 
 class ListarReservas(ListView):
@@ -150,3 +114,34 @@ class EliminarReserva(DeleteView):
 
 
 # endregion
+# region Clases tipo
+class ClasesClientes(ListView):
+    """
+    Vista para listar las clases para los clientes.
+    """
+
+    model = Clase
+    template_name_suffix = "_clientes"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["clases_clientes"] = Clase.objects.filter(
+            cupos_disponibles__gt=0, usuarios__username=self.request.user.username
+        )
+        return context
+
+
+class ClasesPorTipo(ListView):
+    """
+    Vista para listar las clases por tipo.
+    """
+
+    model = Clase
+    template_name_suffix = "_por_tipo"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["clases_tipo"] = Clase.objects.filter(
+            tipo_clase__nombre=self.kwargs["tipo_clase"]
+        )
+        return context

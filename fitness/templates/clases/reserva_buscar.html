@@ -1,0 +1,34 @@
+{% extends "tienda/base.html" %}{%block title%}Búsqueda producto{%endblock %}
+{%block other_content %}Resultados de búsqueda{% endblock %} {%block content %}
+{%for producto in productoBuscado %}
+<div class="row shadow-lg py-5 my-5">
+  <div class="col-4 thumbnail">
+    {%if producto.imagen%}
+    <img
+      src="{{ producto.imagen.url}}"
+      alt="{{
+          producto.nombre
+          }}"
+      class="img-fluid d-flex justify-content-end"
+    />
+    {%endif%}
+  </div>
+  <div class="col-8 caption">
+    <h3>{{producto.nombre}}</h3>
+    <p>{{producto.marca}}</p>
+    <p>{{producto.modelo}}</p>
+    <p>{{producto.precio}}</p>
+    <p>{{producto.unidades}}</p>
+    <p>{{producto.vip}}</p>
+    <p>
+      <a
+        href="{% url 'comprar_producto' producto.pk %}"
+        class="btn btn-primary"
+        role="button"
+        >Comprar</a
+      >
+    </p>
+  </div>
+</div>
+
+{% endfor %} {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "clases/index.html" %}{%block title%}Búsqueda clase{%endblock %}
+{%block other_content %}Resultados de búsqueda{% endblock %} {%block content %}
+{%for clase in clase_tipo %}
+<div class="row shadow-lg py-5 my-5">
+  <div class="col-12">
+    <p>{{clase.tramo}}</p>
+    <p>{{clase.tipo_clase}}</p>
+    <p>{{clase.instructor}}</p>
+    <p>{{clase.cupos_disponibles}}</p>
+    <a class="btn btn-success" href="{%url 'detalle_clase' clase.pk %}"
+      >Detalle clase
+    </a>
+    {%if request.user.is_staff and request.is_superuser%}
+    <a class="btn btn-warning" href="{% url 'editar_clase' clase.pk %}">
+      Editar clase
+    </a>
+    <a class="btn btn-danger" href="{% url 'eliminar_clase' clase.pk %}">
+      Eliminar clase
+    </a>
+    {%endif%}
+  </div>
+</div>
+
+{% endfor %} {% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'tienda/base.html'%}{%block title%}Detalle producto{%endblock %}
+{%block other_content %}Producto {{producto.nombre}}{% endblock %} {%block
+content%}
+<div class="row shadow-lg py-5 my-5">
+  <div class="col-4 thumbnail">
+    {%if producto.imagen%}
+    <img
+      src="{{ producto.imagen.url}}"
+      alt="{{
+          producto.nombre
+          }}"
+      class="img-fluid d-flex justify-content-end"
+    />
+    {%endif%}
+  </div>
+  <div class="col-8 caption">
+    <h3>{{producto.nombre}}</h3>
+    <p>{{producto.marca}}</p>
+    <p>{{producto.modelo}}</p>
+    <p>{{producto.precio}}</p>
+    <p>{{producto.unidades}}</p>
+    <p>{{producto.vip}}</p>
+
+    <a class="btn btn-danger" href="{%url 'cancelar_reserva' clase.pk %}"
+      >Cancelar Reserva
+    </a>
+  </div>
+</div>
+
+{%endblock %}
